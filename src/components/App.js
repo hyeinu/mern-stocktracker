@@ -3,6 +3,7 @@ import { Link } from 'react-router'
 import StockAction from '../actions/StockActions'
 import StockStore from '../stores/StockStore'
 import SearchRes from './SearchRes'
+import Details from './Details'
 
 export default class App extends Component {
   constructor(){
@@ -25,6 +26,7 @@ export default class App extends Component {
   }
   _onChange(){
     this.setState({stocks: StockStore.getAll()})
+    this.setState({details: StockStore.getDetails()})
   }
   changeInput(e){
     this.setState({stock: e.target.value})
@@ -42,6 +44,16 @@ export default class App extends Component {
   render() {
     let term = this.state.stock
     let stocks
+    let details
+
+    console.log('this.state.details', this.state.details)
+
+    if(this.state.details){
+      details = <Details details={this.state.details}/>
+    } else {
+      details = (<div></div>)
+    }
+
     if(this.state.stocks.length){
       stocks = this.state.stocks.map((stock, index) =>{
         return <SearchRes key={index} stock={stock} searchDetails={this.searchDetails}/>
@@ -49,7 +61,7 @@ export default class App extends Component {
     } else {
       stocks = (<div></div>)
     }
-  
+
     return (
       <div className="container">
         <h3>
@@ -65,6 +77,7 @@ export default class App extends Component {
           </div>
         </h3>
         { stocks }
+        { details }
       </div>
     )
   }
