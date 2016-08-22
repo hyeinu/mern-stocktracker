@@ -9,6 +9,14 @@ const API = {
       })
       .then(ServerAction.recieveStocks)
       .catch(console.error)
+  },
+  getDetails(symbol){
+    axios.get(`/api/stocks/details/${symbol}`)
+      .then(res => {
+        return res.data
+      })
+      .then(ServerAction.recieveDetails)
+      .catch(console.error)
   }
 }
 

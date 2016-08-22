@@ -1,5 +1,4 @@
 const request = require('request')
-const parser = require('xml2json')
 
 const getStocks = function(text, cb){
   request(`http://dev.markitondemand.com/MODApis/Api/v2/Lookup/json?input=${text}`, function (error, response, body) {

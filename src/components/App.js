@@ -9,7 +9,8 @@ export default class App extends Component {
     super();
     this.state = {
       stock: '',
-      stocks: []
+      stocks: [],
+      details: {}
     }
     this.changeInput = this.changeInput.bind(this)
     this.searchStock = this.searchStock.bind(this)
@@ -34,11 +35,13 @@ export default class App extends Component {
     StockAction.getStocks(term)
     this.setState({stock: ''})
   }
+  searchDetails(symbol){
+    StockAction.getDetails(symbol)
+    this.setState({stocks: []})
+  }
   render() {
     let term = this.state.stock
     let stocks
-    console.log(this.state.stocks.length)
-    // let stockArr = this.state.stocks
     if(this.state.stocks.length){
       stocks = this.state.stocks.map((stock, index) =>{
         return <SearchRes key={index} stock={stock} searchDetails={this.searchDetails}/>
@@ -46,6 +49,7 @@ export default class App extends Component {
     } else {
       stocks = (<div></div>)
     }
+  
     return (
       <div className="container">
         <h3>

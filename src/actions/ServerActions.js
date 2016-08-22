@@ -7,6 +7,12 @@ const ServerAction = {
       type: Constants.RECIEVE_STOCKS,
       stocks
     })
+  },
+  recieveDetails(details){
+    AppDispatcher.dispatch({
+      type: Constants.RECIEVE_DETAILS,
+      details
+    })
   }
 }
 

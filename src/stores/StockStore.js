@@ -3,7 +3,7 @@ import AppDispatcher from '../AppDispatcher'
 import Constants from '../Constants'
 
 let _stocks = [];
-let _details = [];
+let _details = {};
 
 class StockStore extends EventEmitter{
   constructor(){
@@ -16,6 +16,8 @@ class StockStore extends EventEmitter{
           this.emit('CHANGE');
           break;
         case Constants.RECIEVE_DETAILS:
+        _details = action.details
+          this.emit('CHANGE')
           break;
       }
     });
@@ -31,6 +33,9 @@ class StockStore extends EventEmitter{
 
   getAll(){
     return _stocks;
+  }
+  getDetails(){
+    return _details;
   }
 }
 
